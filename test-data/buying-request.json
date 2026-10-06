@@ -1,0 +1,14 @@
+{
+  "basicRequest": {
+    "productName": "Industrial Bearings",
+    "quantity": "500",
+    "unit": "pieces",
+    "description": "Need high-grade industrial bearings for machinery."
+  },
+  "enrichmentRequest": {
+    "category": "Machinery Parts",
+    "targetPrice": "1500",
+    "deliveryLocation": "Mumbai, India",
+    "deliveryDate": "2026-12-01"
+  }
+}
