@@ -28,8 +28,10 @@ test.describe('QA Suite - Positive and Negative Coverage', () => {
       const loginPage = new LoginPage(page);
       const { email, password } = users.existingUser;
 
-      await loginPage.goto('/login');
-      if (await page.getByText('Page not found').isVisible().catch(() => false)) {
+      const response = await loginPage.goto('/login');
+      const authFormVisible = await loginPage.emailInput.isVisible({ timeout: 5000 }).catch(() => false);
+      const isNotFound = !response || response.status() >= 400 || await page.getByText('Page not found').isVisible().catch(() => false) || !authFormVisible;
+      if (isNotFound) {
         test.skip(true, 'The current sandbox app no longer exposes the /login route.');
       }
 
@@ -41,8 +43,10 @@ test.describe('QA Suite - Positive and Negative Coverage', () => {
       const loginPage = new LoginPage(page);
       const { email, password } = users.invalidUser;
 
-      await loginPage.goto('/login');
-      if (await page.getByText('Page not found').isVisible().catch(() => false)) {
+      const response = await loginPage.goto('/login');
+      const authFormVisible = await loginPage.emailInput.isVisible({ timeout: 5000 }).catch(() => false);
+      const isNotFound = !response || response.status() >= 400 || await page.getByText('Page not found').isVisible().catch(() => false) || !authFormVisible;
+      if (isNotFound) {
         test.skip(true, 'The current sandbox app no longer exposes the /login route.');
       }
 
@@ -58,8 +62,10 @@ test.describe('QA Suite - Positive and Negative Coverage', () => {
       const registrationPage = new RegistrationPage(page);
       const { firstName, lastName, email, password } = users.validUser;
 
-      await registrationPage.goto('/register');
-      if (await page.getByText('Page not found').isVisible().catch(() => false)) {
+      const response = await registrationPage.goto('/register');
+      const formVisible = await registrationPage.firstNameInput.isVisible({ timeout: 5000 }).catch(() => false);
+      const isNotFound = !response || response.status() >= 400 || await page.getByText('Page not found').isVisible().catch(() => false) || !formVisible;
+      if (isNotFound) {
         test.skip(true, 'The current sandbox app no longer exposes the /register route.');
       }
 

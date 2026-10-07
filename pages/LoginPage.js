@@ -8,7 +8,7 @@ class LoginPage {
   }
 
   async goto(url) {
-    await this.page.goto(url);
+    return this.page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
   }
 
   async login(email, password) {
