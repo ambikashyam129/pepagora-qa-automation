@@ -167,11 +167,6 @@ This repo is in a working, validated state for the active buyer journey and is s
 
 If the sandbox restores the legacy auth pages in a future release, the skipped login/registration checks can be re-enabled with minimal changes to the suite.
 
-Result:
-- 1 test run
-- 1 passed
-- final verified run completed successfully
-
 ## Contributing
 
 When adding new tests:
