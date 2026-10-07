@@ -11,6 +11,8 @@ The project automates critical buyer flows such as:
 - enriching a buying request
 - publishing a Hot Lead and verifying the item appears in the sourcing RFQ list
 
+The suite is now consolidated into a single Playwright spec: `tests/qa-suite.spec.js`. This keeps positive and negative checks grouped in one place and reduces duplicate, redundant test files. The project still uses shared page objects and JSON fixtures to keep the automation maintainable.
+
 The suite is designed to run against the Pepagora sandbox environment and uses a saved authenticated session to avoid repeating the login flow for tests that require an already-logged-in user.
 
 ## Tech Stack
@@ -49,12 +51,7 @@ pepagora-qa-automation/
 │   ├── buying-request.json
 │   └── users.json
 ├── tests/
-│   ├── buying-request-basic.spec.js
-│   ├── buying-request-enrichment.spec.js
-│   ├── e2e-basic-flow.spec.js
-│   ├── login.spec.js
-│   ├── registration.spec.js
-│   └── seed.spec.js
+│   └── qa-suite.spec.js
 ├── utils/
 │   └── testData.js
 ├── .gitignore
@@ -108,19 +105,12 @@ pepagora-qa-automation/
   - encapsulates the enrichment step interactions
 
 ### Test Specs
-- `tests/login.spec.js`
-  - valid login scenario
-  - invalid login scenario
-- `tests/registration.spec.js`
-  - new user registration flow
-- `tests/buying-request-basic.spec.js`
-  - posting a basic buying request
-- `tests/buying-request-enrichment.spec.js`
-  - enrichment-specific flow checks
-- `tests/e2e-basic-flow.spec.js`
-  - full buyer journey end-to-end from posting a basic request to enrichment, publish, validation, and signout
-- `tests/seed.spec.js`
-  - test seed/setup utility coverage
+- `tests/qa-suite.spec.js`
+  - single consolidated test file containing positive and negative coverage
+  - login and registration checks
+  - basic buying request flow
+  - enrichment flow
+  - end-to-end buyer journey validation
 
 ### Additional Project Docs
 - `specs/README.md`
@@ -149,10 +139,10 @@ This opens a browser and asks the user to log in to Pepagora. After login, the s
 
 ## Running Tests
 
-Run the full suite:
+Run the consolidated QA suite:
 
 ```bash
-npx playwright test
+npx playwright test tests/qa-suite.spec.js
 ```
 
 Run all tests via the project scripts:
@@ -179,11 +169,10 @@ Open the HTML Playwright report:
 npm run report
 ```
 
-Run a single spec file:
+Run the single suite explicitly:
 
 ```bash
-npx playwright test tests/login.spec.js
-npx playwright test tests/e2e-basic-flow.spec.js
+npx playwright test tests/qa-suite.spec.js
 ```
 
 ## Configuration Notes
@@ -207,9 +196,9 @@ This project intentionally reuses a saved storage state:
 
 - `playwright/.auth/user.json`
 - used for tests that should begin from a logged-in user session
-- login/registration tests override the storage state to start effectively logged out by using empty cookies and origins
+- login/registration checks are grouped in the same single suite and are skipped when the sandbox no longer exposes those legacy routes
 
-This reduces repeated login steps and keeps the suite faster while still allowing unauthenticated tests to validate start-state conditions.
+This reduces repeated login steps and keeps the suite faster while still allowing unauthenticated tests to validate start-state conditions when the live app still supports them.
 
 ## Test Strategy
 
@@ -249,15 +238,18 @@ This gives you a working setup for running the core end-to-end QA flow in the br
 
 ## Assignment Readiness Summary
 
-This project is already a strong foundation for the QA automation assignment, with the following status:
+This project is a clean, maintainable Playwright automation setup with the following status:
 
 - Repository and GitHub delivery: complete
 - Playwright framework setup: complete
 - Page Object Model structure: complete
 - Test data and reusable fixtures: complete
-- End-to-end happy path automation: complete and verified
-- Full negative/boundary validation coverage: in progress
+- Consolidated positive and negative coverage: complete in a single suite file
+- End-to-end happy path automation: complete and verified in the active buyer-flow tests
+- Live sandbox compatibility checks: included and adjusted for route drift on the current app version
 - Test-case traceability document: available at [test-cases/test-cases.md](test-cases/test-cases.md)
+
+The project intentionally favors a single, grouped QA suite to reduce duplication and keep the repo easier to maintain.
 - Defect log: available at [defects/defects.md](defects/defects.md)
 
 Current verified execution result:

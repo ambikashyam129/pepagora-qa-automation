@@ -4,9 +4,9 @@
   "description": "QA automation framework for Pepagora using Playwright and JavaScript",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test",
-    "test:ui": "playwright test --ui",
-    "test:headed": "playwright test --headed",
+    "test": "playwright test tests/qa-suite.spec.js",
+    "test:ui": "playwright test tests/qa-suite.spec.js --ui",
+    "test:headed": "playwright test tests/qa-suite.spec.js --headed",
     "report": "playwright show-report"
   },
   "keywords": [],

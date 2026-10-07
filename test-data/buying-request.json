@@ -2,7 +2,7 @@
   "basicRequest": {
     "productName": "Industrial Bearings",
     "quantity": "500",
-    "unit": "pieces",
+    "unit": "Boxes",
     "description": "Need high-grade industrial bearings for machinery."
   },
   "enrichmentRequest": {
