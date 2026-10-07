@@ -7,10 +7,14 @@ module.exports = defineConfig({
   expect: { timeout: 10000 },
   fullyParallel: false,
   retries: 0,
+  workers: 1,
   reporter: [['html', { open: 'never' }], ['list']],
   use: {
     baseURL: 'https://www.sandbox.pepagora.org',
     headless: true,
+    launchOptions: {
+      slowMo: 300,
+    },
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     trace: 'retain-on-failure',
@@ -21,6 +25,14 @@ module.exports = defineConfig({
     storageState: 'playwright/.auth/user.json',
   },
   projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    {
+      name: 'chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+        launchOptions: {
+          args: ['--start-maximized'],
+        },
+      },
+    },
   ],
 });

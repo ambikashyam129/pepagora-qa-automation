@@ -1,4 +1,0 @@
-[     840ms] [LOG] {countryCookie: SW5kaWE%3D, cityCookie: TWF0dGFudXI%3D, regionCookie: S2VyYWxh} @ https://www.sandbox.pepagora.org/_next/static/chunks/app/%5Blocale%5D/layout-ffa47957e75e22db.js:0
-[     842ms] [LOG] {country: India, city: Mattanur, countryCode: IN, region: Kerala} @ https://www.sandbox.pepagora.org/_next/static/chunks/app/%5Blocale%5D/layout-ffa47957e75e22db.js:0
-[    1976ms] [ERROR] Not signed in with the identity provider. @ https://www.sandbox.pepagora.org/:0
-[    4822ms] [ERROR] [GSI_LOGGER]: FedCM get() rejects with NetworkError: Error retrieving a token. @ https://www.sandbox.pepagora.org/_next/static/chunks/6359-8277513b6ee62791.js:0
