@@ -156,7 +156,7 @@ Result from the fresh run:
 
 The sandbox currently no longer exposes the legacy login and registration pages at `/login` and `/register`. Because of that, the auth tests are intentionally skipped when the page is not available, instead of failing the whole suite. The active buyer-flow tests remain green and validated.
 
-The end-to-end publish flow continues into the sourcing dashboard, opens **My account**, selects **Sign Out**, and verifies that the public **Login** entry is displayed. This test uses the saved authenticated browser state configured for the suite.
+The end-to-end publish flow continues into the sourcing dashboard, opens **My account**, selects **Sign Out**, and verifies the redirect to `/authenticate` and the **Login to your account** heading. This test uses the saved authenticated browser state configured for the suite.
 
 ## Defect evidence
 

@@ -11,6 +11,7 @@ The scope included:
 - user registration and login
 - basic buying request flow
 - enrichment flow
+- publishing a buying request and signing out
 - validation and negative scenarios
 - boundary and end-to-end scenarios
 - defect detection with evidence collection
@@ -70,7 +71,8 @@ Key page objects:
 - [pages/BuyingRequestEnrichmentPage.js](pages/BuyingRequestEnrichmentPage.js)
 
 This design keeps the tests modular, easier to maintain, and more reusable across scenarios.
-Local runs open a visible maximized Chromium window and type form values character by character for easier observation. CI runs remain headless.
+
+Local runs open a visible, maximized Chromium window. Playwright pauses 500 ms between browser actions and types form values character by character with an 80 ms delay so field entry is observable. CI runs remain headless.
 
 ## 4. Test Structure
 
@@ -79,17 +81,17 @@ The final project uses a single consolidated suite:
 
 This file contains grouped scenarios for:
 - login checks
-- logout after publishing a request
 - registration checks
-- logout
 - basic request submission
 - enrichment flow
-- end-to-end buying request validation
+- end-to-end buying request publishing followed by logout
 
 Supporting data files:
 - [test-data/users.json](test-data/users.json)
 - [test-data/buying-request.json](test-data/buying-request.json)
 - [utils/testData.js](utils/testData.js)
+
+The saved browser session used for authenticated tests is stored locally at `playwright/.auth/user.json` and is excluded from Git.
 
 ## 5. Repository Cleanup and Optimization
 
@@ -131,6 +133,8 @@ The defect record includes:
 
 The detailed case matrix is available here:
 - [test-cases/test-cases.md](test-cases/test-cases.md)
+
+The end-to-end test publishes the request, selects **View in Platform**, opens **My account** on `/app/sourcing-rfq`, selects **Sign Out**, and verifies the redirect to `/authenticate` and the **Login to your account** heading.
 
 This document includes the required fields:
 - Test Case ID
@@ -189,7 +193,7 @@ Fresh result:
 - 3 skipped
 - 0 failed
 
-This confirms that the active buyer journey remains passing in the current sandbox environment, while legacy auth checks are intentionally skipped due to route drift.
+The three skipped tests are legacy login and registration checks because the sandbox no longer exposes the `/login` and `/register` routes. The active request, enrichment, publish, and logout journey passes in the current sandbox environment.
 
 ## 11. GitHub Delivery
 
