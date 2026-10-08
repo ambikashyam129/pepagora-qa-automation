@@ -12,8 +12,8 @@ class LoginPage {
   }
 
   async login(email, password) {
-    await this.emailInput.fill(email);
-    await this.passwordInput.fill(password);
+    await this.emailInput.pressSequentially(email, { delay: 80 });
+    await this.passwordInput.pressSequentially(password, { delay: 80 });
     await this.loginButton.click();
   }
 }

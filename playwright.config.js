@@ -11,10 +11,8 @@ module.exports = defineConfig({
   reporter: [['html', { open: 'never' }], ['list']],
   use: {
     baseURL: 'https://www.sandbox.pepagora.org',
-    headless: true,
-    launchOptions: {
-      slowMo: 300,
-    },
+    headless: Boolean(process.env.CI),
+    viewport: null,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     trace: 'retain-on-failure',
@@ -30,6 +28,7 @@ module.exports = defineConfig({
       use: {
         ...devices['Desktop Chrome'],
         launchOptions: {
+          slowMo: 500,
           args: ['--start-maximized'],
         },
       },

@@ -3,6 +3,7 @@ const { LoginPage } = require('../pages/LoginPage');
 const { RegistrationPage } = require('../pages/RegistrationPage');
 const { BuyingRequestBasicPage } = require('../pages/BuyingRequestBasicPage');
 const { BuyingRequestEnrichmentPage } = require('../pages/BuyingRequestEnrichmentPage');
+const { LogoutPage } = require('../pages/LogoutPage');
 const { users, buyingRequest } = require('../utils/testData');
 
 const positiveFlowScenarios = [
@@ -105,12 +106,12 @@ test.describe('QA Suite - Positive and Negative Coverage', () => {
         }
 
         const productNameInput = page.getByRole('combobox', { name: 'e.g. Brazilian Virgin Hair,' });
-        await productNameInput.fill(scenario.productName);
+        await productNameInput.pressSequentially(scenario.productName, { delay: 80 });
         await productNameInput.press('Escape');
         await page.locator('body').click({ position: { x: 20, y: 20 } });
         await productNameInput.evaluate((el) => el.blur());
 
-        await page.getByRole('textbox', { name: '1' }).fill(scenario.quantity);
+        await page.getByRole('textbox', { name: '1' }).pressSequentially(scenario.quantity, { delay: 80 });
         await page.getByRole('button', { name: 'Unit' }).click();
         await page.getByRole('option', { name: scenario.unit }).waitFor({ state: 'visible' });
         await page.keyboard.type(scenario.unit);
@@ -144,11 +145,11 @@ test.describe('QA Suite - Positive and Negative Coverage', () => {
     if (await cookies.isVisible()) await cookies.click();
 
     const productNameInput = page.getByRole('combobox', { name: 'e.g. Brazilian Virgin Hair,' });
-    await productNameInput.fill(productName);
+    await productNameInput.pressSequentially(productName, { delay: 80 });
     await productNameInput.press('Escape');
     await page.locator('body').click({ position: { x: 20, y: 20 } });
     await productNameInput.evaluate((el) => el.blur());
-    await page.getByRole('textbox', { name: '1' }).fill('100');
+    await page.getByRole('textbox', { name: '1' }).pressSequentially('100', { delay: 80 });
 
     await page.getByRole('button', { name: 'Unit' }).click();
     await page.getByRole('option', { name: 'Boxes' }).waitFor({ state: 'visible' });
@@ -188,5 +189,9 @@ test.describe('QA Suite - Positive and Negative Coverage', () => {
     await page.getByRole('button', { name: 'Publish as a Hot Lead' }).click();
 
     await expect(page.getByRole('button', { name: 'View in Platform' })).toBeVisible();
+    await page.getByRole('button', { name: 'View in Platform' }).click();
+
+    const logoutPage = new LogoutPage(page);
+    await logoutPage.logout();
   });
 });

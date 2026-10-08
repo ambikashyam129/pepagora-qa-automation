@@ -15,11 +15,11 @@ class RegistrationPage {
   }
 
   async register(firstName, lastName, email, password) {
-    await this.firstNameInput.fill(firstName);
-    await this.lastNameInput.fill(lastName);
-    await this.emailInput.fill(email);
-    await this.passwordInput.fill(password);
-    await this.confirmPasswordInput.fill(password);
+    await this.firstNameInput.pressSequentially(firstName, { delay: 80 });
+    await this.lastNameInput.pressSequentially(lastName, { delay: 80 });
+    await this.emailInput.pressSequentially(email, { delay: 80 });
+    await this.passwordInput.pressSequentially(password, { delay: 80 });
+    await this.confirmPasswordInput.pressSequentially(password, { delay: 80 });
     await this.registerButton.click();
   }
 }

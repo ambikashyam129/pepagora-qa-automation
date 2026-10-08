@@ -24,6 +24,7 @@ The project validated:
 - input validation rules
 - successful login scenario
 - invalid login flow
+- logout after publishing a buying request
 
 ### 2.2 Basic Buying Request
 The automation covered:
@@ -63,11 +64,13 @@ The suite was implemented using Playwright with:
 
 Key page objects:
 - [pages/LoginPage.js](pages/LoginPage.js)
+- [pages/LogoutPage.js](pages/LogoutPage.js)
 - [pages/RegistrationPage.js](pages/RegistrationPage.js)
 - [pages/BuyingRequestBasicPage.js](pages/BuyingRequestBasicPage.js)
 - [pages/BuyingRequestEnrichmentPage.js](pages/BuyingRequestEnrichmentPage.js)
 
 This design keeps the tests modular, easier to maintain, and more reusable across scenarios.
+Local runs open a visible maximized Chromium window and type form values character by character for easier observation. CI runs remain headless.
 
 ## 4. Test Structure
 
@@ -76,7 +79,9 @@ The final project uses a single consolidated suite:
 
 This file contains grouped scenarios for:
 - login checks
+- logout after publishing a request
 - registration checks
+- logout
 - basic request submission
 - enrichment flow
 - end-to-end buying request validation
@@ -140,6 +145,7 @@ This document includes the required fields:
 The test cases cover:
 - registration
 - login
+- logout
 - basic buying request
 - enrichment
 - mandatory and optional fields

@@ -7,6 +7,7 @@ This document contains the QA test-case matrix for the Pepagora automation suite
 The following categories are included:
 - Registration
 - Login
+- logout
 - Basic Buying Request
 - Enrichment flow
 - Mandatory fields
@@ -32,6 +33,7 @@ The following categories are included:
 | TC-LOG-02 | User cannot log in with invalid password | User is on login page | 1. Enter valid email and wrong password 2. Click login | Valid email + wrong password | Login fails with visible error | Legacy auth route is unavailable in current sandbox; route skipped | Skip |
 | TC-LOG-03 | Required email field is enforced | Login page is open | 1. Leave email empty 2. Submit login | Empty email | Validation message appears | Legacy auth route is unavailable in current sandbox; route skipped | Skip |
 | TC-LOG-04 | Required password field is enforced | Login page is open | 1. Leave password empty 2. Submit login | Empty password | Validation message appears | Legacy auth route is unavailable in current sandbox; route skipped | Skip |
+| TC-LOGOUT-01 | Authenticated user signs out | User is authenticated and can access the sourcing dashboard | 1. Open the sourcing dashboard 2. Open My account 3. Select Sign Out | Saved authenticated browser session | User is signed out and redirected to the Login to your account screen | Redirected to the Login to your account screen | Pass |
 | TC-BR-01 | User opens the buying request form | User is logged in or session state is already established | 1. Navigate to /post-buying-request | Existing authenticated session | Buying request form loads | Pass | Pass |
 | TC-BR-02 | Product name accepts valid input | Buying request form is open | 1. Enter valid product name 2. Remove suggestion overlay focus | Product name: e.g. Organic Bamboo Tissue | Product name is accepted and field remains populated | Pass with blur workaround on suggestion overlay | Pass |
 | TC-BR-03 | Quantity accepts valid numeric value | Buying request form is open | 1. Enter numeric quantity 2. Move focus away | Quantity: 50 | Value is retained and accepted | Pass | Pass |

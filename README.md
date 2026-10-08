@@ -7,6 +7,7 @@ This repository contains a Playwright-based QA automation suite for the Pepagora
 The project covers the key buyer journey for Pepagora:
 - registration flow
 - login flow
+- logout after publishing a buying request
 - posting a buying request
 - enriching the request
 - selecting required answer groups
@@ -41,6 +42,7 @@ pepagora-qa-automation/
 │   ├── BuyingRequestBasicPage.js
 │   ├── BuyingRequestEnrichmentPage.js
 │   ├── LoginPage.js
+│   ├── LogoutPage.js
 │   └── RegistrationPage.js
 ├── playwright/
 │   └── .auth/
@@ -90,6 +92,8 @@ pepagora-qa-automation/
   - enrichment / smart questions flow
 - [pages/LoginPage.js](pages/LoginPage.js)
   - login form interactions
+- [pages/LogoutPage.js](pages/LogoutPage.js)
+  - signs out from the sourcing dashboard and verifies the public Login entry
 - [pages/RegistrationPage.js](pages/RegistrationPage.js)
   - registration form interactions
 
@@ -127,6 +131,8 @@ Run in headed mode:
 npx playwright test tests/qa-suite.spec.js --headed
 ```
 
+Local runs open a visible maximized Chromium window and type form values character by character for easier observation. CI runs remain headless.
+
 Open the HTML report:
 
 ```bash
@@ -149,6 +155,8 @@ Result from the fresh run:
 ## Important live app note
 
 The sandbox currently no longer exposes the legacy login and registration pages at `/login` and `/register`. Because of that, the auth tests are intentionally skipped when the page is not available, instead of failing the whole suite. The active buyer-flow tests remain green and validated.
+
+The end-to-end publish flow continues into the sourcing dashboard, opens **My account**, selects **Sign Out**, and verifies that the public **Login** entry is displayed. This test uses the saved authenticated browser state configured for the suite.
 
 ## Defect evidence
 

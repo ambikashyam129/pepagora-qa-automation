@@ -22,11 +22,11 @@ class BuyingRequestBasicPage {
       await cookies.click();
     }
 
-    await this.productNameInput.fill(productName);
+    await this.productNameInput.pressSequentially(productName, { delay: 80 });
     await this.productNameInput.press('Escape');
     await this.page.locator('body').click({ position: { x: 20, y: 20 } });
     await this.productNameInput.evaluate((el) => el.blur());
-    await this.quantityInput.fill(quantity);
+    await this.quantityInput.pressSequentially(quantity, { delay: 80 });
 
     await this.unitButton.click();
     await this.page.getByRole('option', { name: new RegExp(`^${unit}$`, 'i') }).waitFor({ state: 'visible' });
